@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { Typography } from "antd";
+import { Col, Row, Typography } from "antd";
+import CurrentProjects from "../components/current-projects";
 
 const Dashboard = () => {
   return (
@@ -44,6 +45,14 @@ const Dashboard = () => {
             </Typography.Text>
           </div>
         </div>
+      </div>
+      <div className={styles.dashboard_content}>
+        <Row>
+          <Col lg={{ span: 16 }}>
+            <CurrentProjects />
+          </Col>
+          <Col lg={{ span: 8 }}></Col>
+        </Row>
       </div>
     </div>
   );
