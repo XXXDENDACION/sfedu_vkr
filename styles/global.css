@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'EuclidCircularB';
+  src: url('../public/fonts/EuclidCircularB-Light.woff2') format('woff2');
+  font-display: swap;
+}
+
+html,
+body {
+  padding: 0 !important;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'EuclidCircularB';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    height: 100%;
+
+    @include breakpoint(lg) {
+      font-size: 18px;
+    }
+    overscroll-behavior-y: none;
+}
+
+#__next {
+  overflow-x: hidden;
+}
+
+body {
+  background: rgb(245,242,240);
+}
+
+
+*,*:focus,*:hover{
+  outline:none;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+h1, h2 {
+  font-family: 'EuclidCircularB';
+}
+
+
+ul,
+ol, li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+b {
+  font-family: 'EuclidCircularB';
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
