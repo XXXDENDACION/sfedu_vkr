@@ -28,7 +28,7 @@ body {
 }
 
 body {
-  background: rgb(245,242,240);
+  background: #F0F2F5;;
 }
 
 
@@ -91,4 +91,13 @@ fieldset {
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.page-wrapper {
+  display: flex;
+}
+
+.content-wrapper {
+  margin-top: 20px;
+  display: flex;
 }

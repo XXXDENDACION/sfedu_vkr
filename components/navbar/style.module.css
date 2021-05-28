@@ -1,0 +1,9 @@
+.navbar {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    background-color: #001529;
+    box-shadow: inset 0px -1px 0px #F0F0F0;
+    padding: 8px 16px;
+}
