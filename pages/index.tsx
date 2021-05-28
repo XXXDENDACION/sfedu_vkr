@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import Image from "next/image";
 import { Col, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
+import Commands from "../components/commands";
 
 const Dashboard = () => {
   return (
@@ -47,11 +48,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div className={styles.dashboard_content}>
-        <Row>
+        <Row gutter={{ lg: 32 }}>
           <Col lg={{ span: 16 }}>
             <CurrentProjects />
           </Col>
-          <Col lg={{ span: 8 }}></Col>
+          <Col lg={{ span: 8 }}>
+            <Commands />
+          </Col>
         </Row>
       </div>
     </div>
