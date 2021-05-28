@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
     amd: true,
     node: true,
   },
@@ -24,6 +24,7 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
+    "@typescript-eslint/no-var-requires": 0,
     "react/react-in-jsx-scope": "off", // No need to import React when using Next.js
     "jsx-a11y/anchor-is-valid": "off", // This rule is not compatible with Next.js's <Link /> components
     "@typescript-eslint/explicit-function-return-type": [

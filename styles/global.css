@@ -1,6 +1,7 @@
+@import '~antd/dist/antd.css';
 @font-face {
-  font-family: 'EuclidCircularB';
-  src: url('../public/fonts/EuclidCircularB-Light.woff2') format('woff2');
+  font-family: 'Roboto-Light';
+  src: url('../public/fonts/Roboto-Light.ttf') format('opentype');
   font-display: swap;
 }
 
@@ -9,7 +10,7 @@ body {
   padding: 0 !important;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'EuclidCircularB';
+  font-family: 'Roboto-Light';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
@@ -72,7 +73,7 @@ h6 {
 }
 
 h1, h2 {
-  font-family: 'EuclidCircularB';
+  font-family: 'Roboto';
 }
 
 
@@ -84,7 +85,7 @@ ol, li {
 }
 
 b {
-  font-family: 'EuclidCircularB';
+  font-family: 'Roboto';
 }
 
 fieldset {
@@ -94,10 +95,15 @@ fieldset {
 }
 
 .page-wrapper {
-  display: flex;
 }
 
 .content-wrapper {
-  margin-top: 20px;
+  height: 100vh;
   display: flex;
+}
+
+.header {
+  line-height: 0px;
+  height: auto;
+  padding: 0;
 }
