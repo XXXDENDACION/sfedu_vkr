@@ -1,3 +1,51 @@
-.text {
+
+.dashboard_header {
+  padding: 12px 24px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user_container {
+  display: flex;
+  align-items: center;
+}
+
+.title_text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.85);
+  margin-left: 50px;
+}
+
+.stats_container {
+  display: flex;
+  align-items: center;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stats_title {
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 9px;
+}
+
+.stats_text {
   font-size: 24px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.06);
+  margin: 0 32px;
 }
