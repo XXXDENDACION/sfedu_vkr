@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import LayoutComponent from "../../components/layout";
 import { Avatar, Button, Card, Col, Row, Tooltip, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 const { Meta } = Card;
 
 const tabList = [
@@ -22,13 +23,22 @@ const contentList = {
 };
 
 const AllProjects = () => {
+  const router = useRouter();
+
+  const handleRoute = () => {
+    router.push("/create-project");
+  };
   const [selectedTab, setSelectedTab] = useState("tab1");
   return (
     <LayoutComponent>
       <Card
         style={{ width: "100%" }}
         title="Список проектов"
-        extra={<Button type="primary">Создать проект</Button>}
+        extra={
+          <Button type="primary" onClick={handleRoute}>
+            Создать проект
+          </Button>
+        }
         activeTabKey={selectedTab}
         tabList={tabList}
         onTabChange={(key) => setSelectedTab(key)}

@@ -1,0 +1,18 @@
+
+
+.card_title {
+    background: white;
+    width: 100%;
+    text-align: center;
+}
+
+.title_text {
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.wrapper {
+    margin-top: 20px;
+    background: white;
+    padding: 20px 24px;
+}
