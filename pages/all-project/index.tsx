@@ -45,10 +45,10 @@ const AllProjects = () => {
         bodyStyle={{ padding: "0" }}
       />
       <div className={styles.wrapper}>
-        <Row gutter={{ xl: 16 }} justify={"space-between"}>
+        <Row gutter={{ xl: 16, md: 6 }} justify={"space-between"}>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((item) => (
             <Col
-              sm={{ span: 24 }}
+              xs={{ span: 24 }}
               md={{ span: 12 }}
               lg={{ span: 8 }}
               xl={{ span: 6 }}
