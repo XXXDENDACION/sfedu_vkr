@@ -56,12 +56,14 @@ const AllProjects = () => {
             >
               <div className={styles.item_card}>
                 <Card
+                  onClick={() => router.push("/project-page")}
                   cover={
                     <img
                       alt="example"
                       src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                     />
                   }
+                  className={styles.project_card}
                 >
                   <Meta
                     title="Card title"
