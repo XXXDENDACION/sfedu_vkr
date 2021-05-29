@@ -11,17 +11,17 @@ const App = (props: AppProps): JSX.Element => {
   const { Header, Content, Sider } = Layout;
 
   return (
-    <div style={{ height: "100vh" }}>
-      <Layout>
+    <div>
+      <Layout style={{ height: "100%" }}>
         <Header className="header">
           <NavBar />
         </Header>
         <Layout>
-          <Sider width={200} style={{ background: "white", height: "100%" }}>
+          <Sider width={200} style={{ background: "white" }}>
             <SideBar />
           </Sider>
           <Layout>
-            <Content>
+            <Content style={{ padding: "27px 24px" }}>
               <Component {...pageProps} />
             </Content>
           </Layout>
