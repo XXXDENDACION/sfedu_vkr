@@ -15,13 +15,13 @@ const Commands = () => {
     <div className={styles.commands}>
       <div className={styles.commands_header}>
         <Typography.Text className={styles.header_title}>
-          Текущие проекты
+          Команды
         </Typography.Text>
       </div>
       <div className={styles.commands_content}>
         <Row>
           {commandsArr.map((item, index) => (
-            <Col lg={{ span: 12 }} key={index}>
+            <Col xs={{ span: 12 }} key={index}>
               <div className={styles.command_card}>{item}</div>
             </Col>
           ))}

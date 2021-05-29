@@ -25,7 +25,7 @@ const Dashboard = () => {
         <div className={styles.stats_container}>
           <div className={styles.stats}>
             <Typography.Text className={styles.stats_title}>
-              Projects
+              All Projects
             </Typography.Text>
             <Typography.Text className={styles.stats_text}>56</Typography.Text>
           </div>

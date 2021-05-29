@@ -23,7 +23,13 @@ const CurrentProjects = () => {
       <div className={styles.content}>
         <Row>
           {[0, 1, 2, 3, 4, 5].map((item, index) => (
-            <Col lg={{ span: 8 }} md={{ span: 12 }} key={index}>
+            <Col
+              lg={{ span: 8 }}
+              md={{ span: 12 }}
+              sm={{ span: 12 }}
+              xs={{ span: 24 }}
+              key={index}
+            >
               <ProjectCard />
             </Col>
           ))}
