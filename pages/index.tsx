@@ -5,14 +5,15 @@ import { Col, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
+import LayoutComponent from "../components/layout";
 
 const Dashboard = () => {
   return (
-    <div>
+    <LayoutComponent>
       <div className={styles.dashboard_header}>
         <div className={styles.user_container}>
           <Image
-            src="/dashboard-header.png"
+            src="/static/dashboard-header.png"
             alt="dashboard-header"
             width={72}
             height={72}
@@ -59,7 +60,7 @@ const Dashboard = () => {
           </Col>
         </Row>
       </div>
-    </div>
+    </LayoutComponent>
   );
 };
 
