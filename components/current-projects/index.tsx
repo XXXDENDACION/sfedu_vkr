@@ -7,7 +7,7 @@ const CurrentProjects = () => {
   const router = useRouter();
 
   const handleRoute = () => {
-    router.push("/all-projects");
+    router.push("/all-project");
   };
 
   return (
