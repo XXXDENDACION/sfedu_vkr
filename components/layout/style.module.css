@@ -14,12 +14,9 @@
     .content {
         padding: 0px 6px;
     }
-}
-
-@media screen and (max-width: 768px) {
-   .ant-layout-sider {
-       width: 50px;
-       min-width: 50px;
-       max-width: 50px;
-   }
+    .ant-layout-sider {
+        width: 50px;
+        min-width: 50px;
+        max-width: 50px;
+    }
 }

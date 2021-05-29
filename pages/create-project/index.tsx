@@ -95,7 +95,7 @@ const CreateProject = () => {
               },
             ]}
           >
-            <Input.TextArea placeholder="Введите текст" />
+            <Input.TextArea rows={3} placeholder="Введите текст" />
           </Form.Item>
           <Form.Item
             name="description"
@@ -107,7 +107,7 @@ const CreateProject = () => {
               },
             ]}
           >
-            <Input.TextArea placeholder="Введите описание" />
+            <Input.TextArea rows={3} placeholder="Введите описание" />
           </Form.Item>
           <Form.Item
             name="rate"
