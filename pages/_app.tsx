@@ -11,7 +11,7 @@ const App = (props: AppProps): JSX.Element => {
   const { Header, Content, Sider } = Layout;
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div>
       <Layout style={{ height: "100%" }}>
         <Header className="header">
           <NavBar />
