@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Col, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
+import Activity from "../components/activity";
 
 const Dashboard = () => {
   return (
@@ -51,6 +52,7 @@ const Dashboard = () => {
         <Row gutter={{ lg: 32 }}>
           <Col lg={{ span: 16 }}>
             <CurrentProjects />
+            <Activity />
           </Col>
           <Col lg={{ span: 8 }}>
             <Commands />
