@@ -68,3 +68,8 @@
 .dashboard_content {
   margin-top: 20px;
 }
+
+.rate {
+  display: flex;
+  align-items: center;
+}

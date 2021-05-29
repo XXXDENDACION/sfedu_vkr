@@ -33,7 +33,7 @@ const LayoutComponent: FunctionComponent = (props: LayoutComponentProps) => {
       <Layout>
         <Sider
           width={200}
-          collapsed={collapse}
+          collapsed={collapse ? collapse : false}
           collapsedWidth={50}
           onBreakpoint={(value) => console.log(value)}
           style={{ background: "white" }}

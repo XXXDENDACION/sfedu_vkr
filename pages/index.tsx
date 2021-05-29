@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { Col, Row, Typography } from "antd";
+import { Col, Rate, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
@@ -25,27 +25,19 @@ const Dashboard = () => {
         <div className={styles.stats_container}>
           <div className={styles.stats}>
             <Typography.Text className={styles.stats_title}>
-              All Projects
+              Проектов
             </Typography.Text>
             <Typography.Text className={styles.stats_text}>56</Typography.Text>
           </div>
           <div className={styles.divider}></div>
           <div className={styles.stats}>
             <Typography.Text className={styles.stats_title}>
-              Team Ranking
+              Текущий рейтинг
             </Typography.Text>
-            <Typography.Text className={styles.stats_text}>
-              8/24
-            </Typography.Text>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.stats}>
-            <Typography.Text className={styles.stats_title}>
-              Project Visits
-            </Typography.Text>
-            <Typography.Text className={styles.stats_text}>
-              2,233
-            </Typography.Text>
+            <div className={styles.rate}>
+              <Typography.Text className={styles.stats_text}>8</Typography.Text>
+              <Rate count={1} value={1} style={{ marginLeft: "8px" }} />
+            </div>
           </div>
         </div>
       </div>
