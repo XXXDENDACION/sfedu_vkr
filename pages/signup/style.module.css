@@ -22,7 +22,7 @@
 }
 
 .text {
-  width: 450px;
+  width: 50%;
   padding-bottom: 17px;
   font-size: 12px;
   line-height: 22px;
@@ -43,4 +43,15 @@
 }
 .button {
   margin-top: 24px;
+}
+
+@media screen and (max-width: 376px) {
+  .text {
+    width: 100%;
+  }
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 0;
+  }
 }
