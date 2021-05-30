@@ -2,8 +2,12 @@ import { Form, Input, Button, Checkbox, Tabs, Select } from "antd";
 import styles from "./style.module.css";
 import * as uiIcons from "../../components/icons/blackicon";
 import { Typography } from "antd";
+import axios from "axios";
+import { useRouter } from "next/router";
+
 const { Option } = Select;
 const { TabPane } = Tabs;
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -12,8 +16,40 @@ const tailLayout = {
   wrapperCol: { offset: 0, span: 16 },
 };
 export default function Signup() {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const router = useRouter();
+  const submitSignup = async (values: any) => {
+    try {
+      console.log("Success:", values);
+      const user = await axios({
+        method: "post",
+        url: "http://157.230.26.253/api/register",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: values,
+      });
+      console.log(user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const submitLogin = async (values: any) => {
+    try {
+      console.log("Success:", values);
+      const user = await axios({
+        method: "post",
+        url: "http://157.230.26.253/api/login",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: values,
+      });
+      localStorage.setItem("token", user.data.access_token);
+      router.push("/");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -46,12 +82,12 @@ export default function Signup() {
               {...layout}
               name="basic"
               initialValues={{ remember: true }}
-              onFinish={onFinish}
+              onFinish={submitLogin}
               onFinishFailed={onFinishFailed}
             >
               <Form.Item
                 className={styles.input}
-                name="username"
+                name="email"
                 rules={[
                   { required: true, message: "Please input your username!" },
                 ]}
@@ -88,18 +124,18 @@ export default function Signup() {
               {...layout}
               name="basic"
               initialValues={{ remember: true }}
-              onFinish={onFinish}
+              onFinish={submitSignup}
               onFinishFailed={onFinishFailed}
             >
               <Form.Item
-                name="username"
+                name="first_name"
                 rules={[{ required: true, message: "Please input your name!" }]}
               >
                 <Input placeholder="Имя" />
               </Form.Item>
 
               <Form.Item
-                name="surname"
+                name="last_name"
                 rules={[
                   { required: true, message: "Please input your surname!" },
                 ]}
@@ -108,7 +144,7 @@ export default function Signup() {
               </Form.Item>
               <Form.Item
                 className={styles.input}
-                name="password"
+                name="email"
                 rules={[
                   { required: true, message: "Please input your password!" },
                 ]}
@@ -117,38 +153,36 @@ export default function Signup() {
               </Form.Item>
 
               <Form.Item
-                name="pasword"
+                name="password"
                 rules={[
                   { required: true, message: "Please input your pasword!" },
                 ]}
               >
-                <Input.Password placeholder="Подтвердите пароль" />
+                <Input.Password placeholder="Пароль" />
               </Form.Item>
 
               <Form.Item
-                name="role"
+                name="role_id"
                 rules={[{ required: true, message: "Please input your role!" }]}
               >
                 <Select placeholder="Выберите роль" allowClear>
-                  <Option value="Frontend Developer">Frontend Developer</Option>
-                  <Option value="Backend Developer">Backend Developer</Option>
-                  <Option value="DevOps">DevOps</Option>
-                  <Option value="Q/A">Q/A</Option>
-                  <Option value="Designer">Designer</Option>
+                  <Option value="1">Frontend Developer</Option>
+                  <Option value="2">Backend Developer</Option>
+                  <Option value="3">DevOps</Option>
+                  <Option value="4">Q/A</Option>
+                  <Option value="5">Designer</Option>
                 </Select>
               </Form.Item>
               <Form.Item
-                name="status"
+                name="user_status_id"
                 rules={[
                   { required: true, message: "Please input your status!" },
                 ]}
               >
                 <Select placeholder="Выберите статус" allowClear>
-                  <Option value="Студент">Студент</Option>
-                  <Option value="Преподаватель">Преподаватель</Option>
-                  <Option value="Представитель IT компании">
-                    Представитель IT компании
-                  </Option>
+                  <Option value="1">Студент</Option>
+                  <Option value="2">Преподаватель</Option>
+                  <Option value="3">Представитель IT компании</Option>
                 </Select>
               </Form.Item>
 
