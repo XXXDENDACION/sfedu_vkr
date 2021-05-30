@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card, Form, Input, Radio, Rate } from "antd";
 import LayoutComponent from "../../components/layout";
 import styles from "./style.module.css";
+import axios from "axios";
 
 const formItemLayout = {
   labelCol: {
@@ -40,8 +41,15 @@ const tailFormItemLayout = {
 const CreateProject = () => {
   const [form] = Form.useForm();
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log(values);
+    const project = await axios({
+      method: "post",
+      url: "http://157.230.26.253/api/projects",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
@@ -121,10 +129,10 @@ const CreateProject = () => {
           >
             <Rate />
           </Form.Item>
-          <Form.Item name="who" label="Для кого:">
+          <Form.Item name="is_public" label="Для кого:">
             <Radio.Group>
-              <Radio value="public">Публичный</Radio>
-              <Radio value="commands">Команда</Radio>
+              <Radio value="1">Публичный</Radio>
+              <Radio value="0">Команда</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>

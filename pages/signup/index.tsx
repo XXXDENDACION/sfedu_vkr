@@ -4,7 +4,6 @@ import * as uiIcons from "../../components/icons/blackicon";
 import { Typography } from "antd";
 import axios from "axios";
 import { useRouter } from "next/router";
-
 const { Option } = Select;
 const { TabPane } = Tabs;
 
@@ -25,6 +24,7 @@ export default function Signup() {
         url: "http://157.230.26.253/api/register",
         headers: {
           "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
         },
         data: values,
       });
@@ -46,7 +46,10 @@ export default function Signup() {
         data: values,
       });
       localStorage.setItem("token", user.data.access_token);
-      router.push("/");
+      if (user.data.is_admin === "0") router.push("/");
+      else {
+        router.push("/super-admin");
+      }
     } catch (e) {
       console.log(e);
     }
@@ -103,15 +106,6 @@ export default function Signup() {
               >
                 <Input.Password placeholder="Пароль" />
               </Form.Item>
-
-              <Form.Item
-                {...tailLayout}
-                name="remember"
-                valuePropName="checked"
-              >
-                <Checkbox>Запомнить</Checkbox>
-              </Form.Item>
-
               <Form.Item {...tailLayout}>
                 <Button name="signin" type="primary" htmlType="submit">
                   Авторизоваться
