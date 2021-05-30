@@ -17,11 +17,6 @@ const tabList = [
   },
 ];
 
-const contentList = {
-  tab1: <p>Мои проекты</p>,
-  tab2: <p>Текущие проекты</p>,
-};
-
 const AllProjects = () => {
   const router = useRouter();
 
@@ -39,7 +34,6 @@ const AllProjects = () => {
             Создать проект
           </Button>
         }
-        hoverable
         activeTabKey={selectedTab}
         tabList={tabList}
         onTabChange={(key) => setSelectedTab(key)}
@@ -64,6 +58,7 @@ const AllProjects = () => {
                       src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                     />
                   }
+                  hoverable
                   className={styles.project_card}
                 >
                   <Meta
