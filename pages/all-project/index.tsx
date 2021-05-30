@@ -39,6 +39,7 @@ const AllProjects = () => {
             Создать проект
           </Button>
         }
+        hoverable
         activeTabKey={selectedTab}
         tabList={tabList}
         onTabChange={(key) => setSelectedTab(key)}
