@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import { Col, Rate, Row, Typography } from "antd";
@@ -6,8 +6,24 @@ import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
 import LayoutComponent from "../components/layout";
+import axios from "axios";
+import AwardsCard from "../components/awards-card";
 
 const Dashboard = () => {
+  const getUser = async () => {
+    const user = await axios.get("http://157.230.26.253/api/user", {
+      headers: {
+        Authorization: "Bearer 1|v2VfETfBtBWFI19bxcLWkX15aBh7LH78EwpqCLAk",
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(user);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <LayoutComponent>
       <div className={styles.dashboard_header}>
@@ -49,6 +65,7 @@ const Dashboard = () => {
           </Col>
           <Col lg={{ span: 8 }}>
             <Commands />
+            <AwardsCard />
           </Col>
         </Row>
       </div>
