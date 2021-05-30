@@ -1,0 +1,14 @@
+.wrapper {
+    margin-top: 20px;
+    background: transparent;
+}
+
+.item_card {
+    margin-bottom: 20px;
+}
+
+.card_content {
+    margin-top: 10px;
+    align-items: flex-end;
+    display: flex;
+}
