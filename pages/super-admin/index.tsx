@@ -19,6 +19,7 @@ const columns = [
     title: "Фамилия",
     dataIndex: "secondName",
     key: "secondName",
+    // eslint-disable-next-line react/display-name
     render: (text) => <a>{text}</a>,
   },
   {
@@ -44,6 +45,7 @@ const columns = [
   {
     title: "Action",
     key: "action",
+    // eslint-disable-next-line react/display-name
     render: (text, record) => (
       <Space size="middle">
         <Button type="link">Принять {record.name}</Button>
