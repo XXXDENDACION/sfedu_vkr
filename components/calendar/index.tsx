@@ -20,7 +20,7 @@ const Calendar: FunctionComponent = () => {
         title: "MS training",
         allDay: true,
         start: new Date(),
-        end: new Date(new Date().getTime() + 1),
+        end: new Date(),
         resource: 2
       },
       {
@@ -36,32 +36,37 @@ const Calendar: FunctionComponent = () => {
         resource: 4
       }
     ]);
-    
-    const onEventDrop = ({event, start, end}): void => {
-      const idx = events.indexOf(event);
-      const updateEvent = { ...event, start, end };
+  const [selectedEvent, setSelectedEvent] = useState<Event>();
 
-      const nextEvents = [...events];
-      nextEvents.splice(idx, 1, updateEvent);
+  const onSelectEvent = (event: Event): void => {
+    setSelectedEvent(event);
+  };
 
-      setEvents(nextEvents);
-    };
+  const onEventDrop = ({event, start, end}): void => {
+  const idx = events.indexOf(event);
+  const updateEvent = { ...event, start, end };
 
-    console.log(events);
+  const nextEvents = [...events];
+  nextEvents.splice(idx, 1, updateEvent);
 
-    return (
-        <div>
-            <DndCalendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                onEventDrop={onEventDrop}
-                draggableAccessor={() => true}
-                style={{ height: 500 }}
-            />
-        </div>
-    );
+  setEvents(nextEvents);
+  };
+
+
+  return (
+    <div>
+        <DndCalendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            onSelectEvent={onSelectEvent}
+            onEventDrop={onEventDrop}
+            draggableAccessor={() => true}
+            style={{ height: 500 }}
+        />
+    </div>
+);
 };
 
 
