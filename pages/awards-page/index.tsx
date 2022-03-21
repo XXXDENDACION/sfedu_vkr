@@ -6,7 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 
 const AwardsPage = () => {
   return (
-    <LayoutComponent>
+    <>
       <Card
         className={styles.card_title}
         title="Награды"
@@ -36,7 +36,7 @@ const AwardsPage = () => {
           ))}
         </Row>
       </div>
-    </LayoutComponent>
+    </>
   );
 };
 

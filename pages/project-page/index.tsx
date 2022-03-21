@@ -6,7 +6,7 @@ import React from "react";
 
 const ProjectPage = () => {
   return (
-    <LayoutComponent>
+    <>
       <Card
         className={styles.card_title}
         title="Food Hub"
@@ -71,7 +71,7 @@ const ProjectPage = () => {
           </Col>
         </Row>
       </div>
-    </LayoutComponent>
+    </>
   );
 };
 

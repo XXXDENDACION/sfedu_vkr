@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import { Button, Card, Col, Rate, Row, Typography } from "antd";
 import { useRouter } from "next/router";
 
-const AwardsCard = () => {
+const AwardsCard = (): JSX.Element => {
   const router = useRouter();
   return (
     <div style={{ marginTop: "32px" }}>

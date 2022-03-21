@@ -29,6 +29,9 @@ const SideBar = () => {
           <Menu.Item key="/all-project">
             <Link href={{ pathname: "/all-project" }}>Проекты</Link>
           </Menu.Item>
+          <Menu.Item key="/calendar">
+            <Link href={{ pathname: "/calendar" }}>Календарь</Link>
+          </Menu.Item>
         </SubMenu>
       </Menu>
     </div>

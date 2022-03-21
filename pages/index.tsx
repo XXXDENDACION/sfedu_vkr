@@ -5,27 +5,11 @@ import { Col, Rate, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
-import LayoutComponent from "../components/layout";
-import axios from "axios";
 import AwardsCard from "../components/awards-card";
 
-const Dashboard = () => {
-  const getUser = async () => {
-    const user = await axios.get("http://157.230.26.253/api/user", {
-      headers: {
-        Authorization: "Bearer 1|v2VfETfBtBWFI19bxcLWkX15aBh7LH78EwpqCLAk",
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(user);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+const Dashboard = (): JSX.Element => {
   return (
-    <LayoutComponent>
+    <>
       <div className={styles.dashboard_header}>
         <div className={styles.user_container}>
           <Image
@@ -35,7 +19,7 @@ const Dashboard = () => {
             height={72}
           />
           <Typography.Text className={styles.title_text}>
-            Доброе утро, Денис Смирнов
+            ITP Premium
           </Typography.Text>
         </div>
         <div className={styles.stats_container}>
@@ -69,7 +53,7 @@ const Dashboard = () => {
           </Col>
         </Row>
       </div>
-    </LayoutComponent>
+    </>
   );
 };
 

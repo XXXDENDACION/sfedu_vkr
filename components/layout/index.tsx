@@ -17,10 +17,6 @@ const LayoutComponent: FunctionComponent = (props: LayoutComponentProps) => {
   const [collapse, setCollapse] = useState<boolean>(false);
   const screens = useBreakpoint();
 
-  const onCollapse = (collapsed: boolean) => {
-    setCollapse(collapsed);
-  };
-
   useEffect(() => {
     !screens.xl ? setCollapse(true) : setCollapse(false);
   }, [screens]);

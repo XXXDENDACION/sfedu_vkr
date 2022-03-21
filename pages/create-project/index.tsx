@@ -53,7 +53,7 @@ const CreateProject = () => {
   };
 
   return (
-    <LayoutComponent>
+    <>
       <Card
         className={styles.card_title}
         title="Создание проекта"
@@ -142,7 +142,7 @@ const CreateProject = () => {
           </Form.Item>
         </Form>
       </div>
-    </LayoutComponent>
+      </>
   );
 };
 
