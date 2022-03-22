@@ -5,9 +5,8 @@ import { Calendar as BigCalendar, CalendarProps, Event, momentLocalizer } from "
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import EditEvent from "./edit-event";
 
-const { Title } = Typography;
-const { RangePicker } = DatePicker;
 const localizer = momentLocalizer(moment);
 
 const dateFormat = "YYYY/MM/DD HH:mm";
@@ -71,47 +70,12 @@ const Calendar: FunctionComponent = () => {
             draggableAccessor={() => true}
             style={{ height: 500 }}
         />
-        <div className={styles.formWrapper}>
-          {selectedEvent && (
-            <Form
-              name="eventDetails"
-              form={form}
-              onFinish={onFinish}
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
-            >
-              <Title className={styles.title} level={2}>Детали события</Title>
-              <Form.Item
-                label="title"
-                name="title"
-              >
-                <Input/>
-              </Form.Item>
-              <Form.Item
-                label="description"
-                name="description"
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="rangePicker"
-                name="rangePicker"
-              >
-                <RangePicker 
-                  format={dateFormat} 
-                  showTime
-                />
-              </Form.Item>
-              <Form.Item
-                wrapperCol={{ span: 8, offset: 8 }}
-              >
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          )}
-        </div>
+        <EditEvent
+            selectedEvent={selectedEvent}
+            dateFormat={dateFormat}
+            form={form}
+            onFinish={onFinish}
+        />
     </div>
 );
 };

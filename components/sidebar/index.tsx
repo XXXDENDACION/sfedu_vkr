@@ -23,9 +23,9 @@ const SideBar = () => {
           <Menu.Item key="/">
             <Link href={{ pathname: "/" }}>Главная</Link>
           </Menu.Item>
-          <Menu.Item key="/awards-page">
-            <Link href={{ pathname: "/awards-page" }}>Награды</Link>
-          </Menu.Item>
+          {/*<Menu.Item key="/awards-page">*/}
+          {/*  <Link href={{ pathname: "/awards-page" }}>Награды</Link>*/}
+          {/*</Menu.Item>*/}
           <Menu.Item key="/all-project">
             <Link href={{ pathname: "/all-project" }}>Проекты</Link>
           </Menu.Item>

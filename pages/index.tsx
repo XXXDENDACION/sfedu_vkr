@@ -31,12 +31,12 @@ const Dashboard = (): JSX.Element => {
           </div>
           <div className={styles.divider}></div>
           <div className={styles.stats}>
-            <Typography.Text className={styles.stats_title}>
-              Текущий рейтинг
-            </Typography.Text>
+            {/*<Typography.Text className={styles.stats_title}>*/}
+            {/*  Текущий рейтинг*/}
+            {/*</Typography.Text>*/}
             <div className={styles.rate}>
-              <Typography.Text className={styles.stats_text}>8</Typography.Text>
-              <Rate count={1} value={1} style={{ marginLeft: "8px" }} />
+              {/*<Typography.Text className={styles.stats_text}>8</Typography.Text>*/}
+              {/*<Rate count={1} value={1} style={{ marginLeft: "8px" }} />*/}
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ const Dashboard = (): JSX.Element => {
           </Col>
           <Col lg={{ span: 8 }}>
             <Commands />
-            <AwardsCard />
+            {/*<AwardsCard />*/}
           </Col>
         </Row>
       </div>
