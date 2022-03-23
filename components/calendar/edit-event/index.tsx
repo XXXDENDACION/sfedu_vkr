@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../style.module.css";
+import styles from "./style.module.css";
 import {Event} from "react-big-calendar";
 import {Button, Form, Input, Typography, DatePicker} from "antd";
 
@@ -13,7 +13,7 @@ interface IEditEvent {
 const EditEvent = (props: IEditEvent) => {
     const {selectedEvent, form, onFinish, dateFormat} = props;
     return (
-        <div className={styles.formWrapper}>
+        <div>
             {selectedEvent && (
                 <Form
                     name="eventDetails"
@@ -24,19 +24,19 @@ const EditEvent = (props: IEditEvent) => {
                 >
                     <Typography.Title className={styles.title} level={2}>Детали события</Typography.Title>
                     <Form.Item
-                        label="title"
+                        label="Название"
                         name="title"
                     >
                         <Input/>
                     </Form.Item>
                     <Form.Item
-                        label="description"
+                        label="Описание"
                         name="description"
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        label="rangePicker"
+                        label="Выберите время"
                         name="rangePicker"
                     >
                         <DatePicker.RangePicker
