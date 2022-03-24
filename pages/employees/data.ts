@@ -2,7 +2,7 @@ import {IUser} from "../../utils/interfaces/users";
 
 export const UsersList: IUser[] = [
     {
-        id: 0,
+        key: 0,
         firstName: "Denis",
         lastName: "Smirnov",
         age: "18",
@@ -10,7 +10,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 1,
+        key: 1,
         firstName: "Daniil",
         lastName: "Smirnov",
         age: "21",
@@ -18,7 +18,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 2,
+        key: 2,
         firstName: "Pavel",
         lastName: "Chulanov",
         age: "31",
@@ -26,7 +26,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 3,
+        key: 3,
         firstName: "Ivan",
         lastName: "Ivanon",
         age: "18",
@@ -34,7 +34,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 4,
+        key: 4,
         firstName: "Denis",
         lastName: "Smirnov",
         age: "18",
@@ -42,7 +42,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 5,
+        key: 5,
         firstName: "Denis",
         lastName: "Smirnov",
         age: "35",
@@ -50,7 +50,7 @@ export const UsersList: IUser[] = [
         skills: ["JavaScript", "CSS"]
     },
     {
-        id: 6,
+        key: 6,
         firstName: "Denis",
         lastName: "Smirnov",
         age: "30",

@@ -1,0 +1,9 @@
+.userDetailsWrapper {
+  padding: 16px 24px;
+  background-color: white;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: bold;
+}

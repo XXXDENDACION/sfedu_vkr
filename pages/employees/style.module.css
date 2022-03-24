@@ -1,5 +1,29 @@
 .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageHeader {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.filterWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.link {
+  margin-right: 10px;
+}
+
+.linkIcon {
+  margin-right: 5px;
+  color: blue;
 }

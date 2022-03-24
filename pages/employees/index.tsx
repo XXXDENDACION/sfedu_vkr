@@ -1,24 +1,52 @@
 import React from "react";
 import "antd/dist/antd.css";
 import styles from "./style.module.css";
-import {Table, Tag, PageHeader, Button, Statistic} from "antd";
+import {Table, Tag, PageHeader, Button, Statistic, Select, Typography} from "antd";
 import {UsersList} from "./data";
+import { IUser } from "../../utils/interfaces/users";
+import { useRouter } from "next/router";
 
-const {Column} = Table;
+const { Option } = Select;
+const { Column } = Table;
 
 const Employees = () => {
+    const router = useRouter();
+
+    const rowSelection = {
+        onChange: (selectedRowKeys: React.Key[], selectedRows: IUser[]) => {
+          console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
+        },
+        getCheckboxProps: (record: IUser) => ({
+          name: record.firstName,
+        }),
+    };
+
     return (
         <div>
             <PageHeader
-                className="site-page-header-responsive"
+                className={styles.pageHeader}
                 title="Сотрудники"
                 extra={[
-                    <Button key="edit" type="primary">Edit</Button>
+                    <>
+                        <Button key="withoutProject">Без проекта</Button>
+                        <Button key="edit" type="primary" danger disabled>Изменить</Button>
+                    </>
                 ]}
             >
                 <HeaderContent />
             </PageHeader>
-            <Table dataSource={UsersList}>
+            <Table
+                dataSource={UsersList} 
+                rowSelection={{
+                    type: "checkbox",
+                    ...rowSelection
+                }}
+                onRow={(record) => {
+                    return {
+                        onClick: () => router.push(`/employees/${record.key}`)
+                    };
+                }}
+            >
                 <Column title="First Name" dataIndex="firstName" key="firstName" />
                 <Column title="Last Name" dataIndex="lastName" key="lastName" />
                 <Column title="Age" dataIndex="age" key="age" />
@@ -29,11 +57,37 @@ const Employees = () => {
     );
 };
 
-function HeaderContent(): JSX.Element {
+function HeaderContent(): JSX.Element { 
     return (
         <div className={styles.content}>
             <div>
-
+                <Typography.Title level={5}>Фильтры</Typography.Title>
+                <div className={styles.filterWrapper}>
+                    <Select
+                        showSearch
+                        placeholder="Choose role"
+                        optionFilterProp="children"
+                        className={styles.select}
+                    >
+                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"role" + idx} value={item}>{item}</Option>)}
+                    </Select>
+                    <Select
+                        showSearch
+                        placeholder="Choose department"
+                        optionFilterProp="children"
+                        className={styles.select}
+                    >
+                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"department" + idx} value={item}>{item}</Option>)}
+                    </Select>
+                    <Select
+                        showSearch
+                        placeholder="Choose skills"
+                        optionFilterProp="children"
+                        className={styles.select}
+                    >
+                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"skill" + idx} value={item}>{item}</Option>)}
+                    </Select>
+                </div>
             </div>
             <div>
                 <Statistic title="Количество" value={10} />
