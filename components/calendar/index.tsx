@@ -33,12 +33,12 @@ const Calendar: FunctionComponent = () => {
 
   const onSelectEvent = (event: Event): void => {
     setSelectedEvent(event);
+    setIsNewEvent(false);
     form.setFieldsValue({
       title: event.title,
       description: event.resource.description,
       rangePicker: [moment(event.start, dateFormat), moment(event.end, dateFormat)]
     });
-    console.log(form.getFieldsValue());
   };
 
   const onEventDrop = ({event, start, end}): void => {
@@ -60,10 +60,12 @@ const Calendar: FunctionComponent = () => {
     nextEvents.splice(idx, 1, updateEvent);
 
     setEvents(nextEvents);
+    setSelectedEvent(null);
   };
 
   const onAdd = (): void => {
     setIsNewEvent(true);
+    setSelectedEvent(null);
   };
 
   const onCreate = (values): void => {
@@ -84,7 +86,7 @@ const Calendar: FunctionComponent = () => {
 
   return (
     <div>
-        <Button onClick={onAdd} className={styles.addButton} type="primary" shape="circle" icon={<Plus />} />
+      <Button onClick={onAdd} className={styles.addButton} type="primary" >Добавить событие</Button>
         <DndCalendar
             localizer={localizer}
             events={events}
@@ -96,12 +98,14 @@ const Calendar: FunctionComponent = () => {
             style={{ height: 500 }}
         />
         <div className={styles.formWrapper}>
-          <EditEvent
-              selectedEvent={selectedEvent}
-              dateFormat={dateFormat}
-              form={form}
-              onFinish={onEdit}
-          />
+          {selectedEvent && (
+              <EditEvent
+                selectedEvent={selectedEvent}
+                dateFormat={dateFormat}
+                form={form}
+                onFinish={onEdit}
+            />
+          )}
           {isNewEvent && (
             <CreateEvent
                 dateFormat={dateFormat}

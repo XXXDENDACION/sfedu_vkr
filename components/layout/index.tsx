@@ -23,9 +23,9 @@ const LayoutComponent: FunctionComponent = (props: LayoutComponentProps) => {
 
   return (
     <Layout style={{ height: "100%" }}>
-      <Header className="header">
-        <NavBar />
-      </Header>
+      {/*<Header className="header">*/}
+      {/*  <NavBar />*/}
+      {/*</Header>*/}
       <Layout>
         <Sider
           width={200}
