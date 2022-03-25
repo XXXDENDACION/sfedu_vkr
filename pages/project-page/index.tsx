@@ -1,10 +1,10 @@
 import styles from "./style.module.css";
-import { Button, Card, Col, Input, Rate, Row, Typography } from "antd";
+import {Avatar, Button, Card, Col, Input, Row, Typography} from "antd";
 import Image from "next/image";
-import LayoutComponent from "../../components/layout";
-import React from "react";
+import React, {FunctionComponent} from "react";
+import {getArrayNumber} from "../../utils/helpers/generateData";
 
-const ProjectPage = () => {
+const ProjectPage: FunctionComponent = () => {
   return (
     <>
       <Card
@@ -44,19 +44,21 @@ const ProjectPage = () => {
                 приложения для курьеров, и веб интерфейса для оператора и
                 кассира.
               </Typography.Text>
-              <div className={styles.request_container}>
-                <Button
-                  className={styles.make_request}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Подать заявку
-                </Button>
-                <Rate value={3} />
-              </div>
             </Col>
           </Row>
         </div>
+        {getArrayNumber(5).map(item => (
+            <Card
+                key={`card-user-${item}`}
+                className={styles.userCard}
+                bodyStyle={{ padding: "10px 5px"}}
+                hoverable
+                onClick={() => console.log("Click")}
+        >
+            <Avatar className={styles.userCard_avatar} src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
+            <Typography.Text>Denis Smirnov</Typography.Text>
+          </Card>
+        ))}
         <Row>
           <Col md={{ span: 24 }} lg={{ span: 16 }}>
             <Input.TextArea

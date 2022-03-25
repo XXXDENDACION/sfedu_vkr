@@ -1,8 +1,9 @@
 
 .dashboard_header {
-  padding: 12px 24px;
+  padding: 12px 50px;
   background-color: white;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
@@ -10,20 +11,12 @@
 @media screen and (max-width: 992px) {
   .dashboard_header {
     flex-wrap: wrap;
-    justify-content: center;
   }
 }
 
 .user_container {
   display: flex;
   align-items: center;
-}
-
-
-@media screen and (max-width: 992px) {
-  .user_container {
-    margin-bottom: 20px;
-  }
 }
 
 .title_text {

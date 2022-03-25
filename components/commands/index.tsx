@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
-import { Col, Row, Typography } from "antd";
+import { Col, Row } from "antd";
+import DashboardCard from "../dashboard-card";
 
 const Commands = (): JSX.Element => {
   const commandsArr = [
@@ -12,22 +13,15 @@ const Commands = (): JSX.Element => {
     "Отдел №6",
   ];
   return (
-    <div className={styles.commands}>
-      <div className={styles.commands_header}>
-        <Typography.Text className={styles.header_title}>
-          Отделы
-        </Typography.Text>
-      </div>
-      <div className={styles.commands_content}>
-        <Row>
-          {commandsArr.map((item, index) => (
-            <Col xs={{ span: 12 }} key={index}>
-              <div className={styles.command_card}>{item}</div>
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </div>
+      <DashboardCard title="Отделы">
+          <Row>
+              {commandsArr.map((item, index) => (
+                  <Col xs={{ span: 12 }} key={index}>
+                      <div className={styles.command_card}>{item}</div>
+                  </Col>
+              ))}
+          </Row>
+      </DashboardCard>
   );
 };
 

@@ -50,6 +50,7 @@
 }
 
 .textarea {
+    margin-top: 25px;
     margin-bottom: 24px;
 }
 
@@ -66,4 +67,14 @@
     .make_request {
         margin-right: 10px;
     }
+}
+
+.userCard {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.userCard_avatar {
+    margin-right: 10px;
 }

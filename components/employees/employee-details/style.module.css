@@ -3,7 +3,32 @@
   background-color: white;
 }
 
+.userProjectsWrapper {
+  margin-top: 30px;
+}
+
+.skillWrapper {
+  margin-top: 30px;
+}
+
+.commentsWrapper {
+  margin-top: 30px;
+}
+
+.projectTitle {
+  margin-bottom: 20px;
+}
+
+.projectsList {
+  display: flex;
+}
+
 .label {
   font-size: 18px;
   font-weight: bold;
+}
+
+.card {
+  width: 240px;
+  margin-bottom: 10px;
 }

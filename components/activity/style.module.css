@@ -1,24 +1,5 @@
-
-.activity {
-    margin-top: 24px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    margin-bottom: 15px;
-}
-
-.activity_header {
-    padding: 16px 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.header_title {
-    font-size: 16px;
-    line-height: 24px;
-    color: rgba(0, 0, 0, 0.85);
-}
-
-.activity_content {
-    padding: 24px 24px;
+.activity_card {
+    margin-top: 20px;
 }
 
 .activity_row {

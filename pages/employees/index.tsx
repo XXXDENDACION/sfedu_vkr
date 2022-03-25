@@ -2,12 +2,45 @@ import React from "react";
 import "antd/dist/antd.css";
 import styles from "./style.module.css";
 import {Table, Tag, PageHeader, Button, Statistic, Select, Typography} from "antd";
-import {UsersList} from "./data";
+import { UsersList} from "../../utils/data/data";
 import { IUser } from "../../utils/interfaces/users";
 import { useRouter } from "next/router";
+import {ColumnsType} from "antd/lib/table/interface";
 
 const { Option } = Select;
 const { Column } = Table;
+
+export const Columns: ColumnsType = [
+    {
+        title: "Имя",
+        dataIndex: "firstName",
+        key: "firstName",
+        responsive: ["md"]
+    },
+    {
+        title: "Фамилия",
+        dataIndex: "lastName",
+        key: "lastName",
+    },
+    {
+        title: "Возраст",
+        dataIndex: "age",
+        key: "age",
+        responsive: ["md"]
+    },
+    {
+        title: "Должность",
+        dataIndex: "position",
+        key: "position",
+    },
+    {
+        title: "Скиллы",
+        dataIndex: "skills",
+        key: "skills",
+        responsive: ["md"],
+        render: skills => renderTags(skills)
+    }
+];
 
 const Employees = () => {
     const router = useRouter();
@@ -36,7 +69,8 @@ const Employees = () => {
                 <HeaderContent />
             </PageHeader>
             <Table
-                dataSource={UsersList} 
+                dataSource={UsersList}
+                columns={Columns}
                 rowSelection={{
                     type: "checkbox",
                     ...rowSelection
@@ -47,17 +81,17 @@ const Employees = () => {
                     };
                 }}
             >
-                <Column title="First Name" dataIndex="firstName" key="firstName" />
-                <Column title="Last Name" dataIndex="lastName" key="lastName" />
-                <Column title="Age" dataIndex="age" key="age" />
-                <Column title="Position" dataIndex="position" key="position" />
-                <Column title="Skills" dataIndex="skills" key="skills" render={skills => renderTags(skills)}/>
+                <Column title="Имя" dataIndex="firstName" key="firstName" />
+                <Column title="Фамилия" dataIndex="lastName" key="lastName" />
+                <Column title="Возраст" dataIndex="age" key="age" />
+                <Column title="Должность" dataIndex="position" key="position" />
+                <Column title="Скиллы" dataIndex="skills" key="skills" render={skills => renderTags(skills)}/>
             </Table>
         </div>
     );
 };
 
-function HeaderContent(): JSX.Element { 
+function HeaderContent(): JSX.Element {
     return (
         <div className={styles.content}>
             <div>

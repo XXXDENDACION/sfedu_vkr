@@ -7,6 +7,6 @@ module.exports = withReactSvg({
     return config;
   },
   images: {
-    domains: ["localhost:3000"],
+    domains: ["*"],
   },
 });

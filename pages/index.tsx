@@ -6,6 +6,7 @@ import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
 import AwardsCard from "../components/awards-card";
+import PieCard from "../components/pie-card";
 
 const Dashboard = (): JSX.Element => {
   return (
@@ -29,7 +30,6 @@ const Dashboard = (): JSX.Element => {
             </Typography.Text>
             <Typography.Text className={styles.stats_text}>56</Typography.Text>
           </div>
-          <div className={styles.divider}></div>
           <div className={styles.stats}>
             {/*<Typography.Text className={styles.stats_title}>*/}
             {/*  Текущий рейтинг*/}
@@ -43,12 +43,13 @@ const Dashboard = (): JSX.Element => {
       </div>
       <div className={styles.dashboard_content}>
         <Row gutter={{ lg: 32 }}>
-          <Col lg={{ span: 16 }}>
+          <Col lg={{ span: 12 }}>
             <CurrentProjects />
             <Activity />
           </Col>
-          <Col lg={{ span: 8 }}>
+          <Col lg={{ span: 12 }}>
             <Commands />
+            <PieCard />
             {/*<AwardsCard />*/}
           </Col>
         </Row>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { useRouter } from "next/router";
-import styles from './style.module.css';
-import {Table, Tag, PageHeader, Button, Row, Statistic, Select, Typography} from "antd";
+import styles from "./style.module.css";
+import {Table, Tag, PageHeader, Button, Row, Col, Typography} from "antd";
 import EmployeeDetails from "../../components/employees/employee-details";
 
 const { Paragraph } = Typography;
@@ -28,11 +28,13 @@ const Employee: FunctionComponent = () => {
                 subTitle="This is a subtitle"
                 tags={<Tag color="blue">In Project</Tag>}
                 extra={[
-                    <Button key="3">Operation</Button>,
-                    <Button key="2">Operation</Button>,
-                    <Button key="1" type="primary">
-                        Primary
-                    </Button>,
+                    <div key="buttons">
+                        <Button key="3">Operation</Button>,
+                        <Button key="2">Operation</Button>,
+                        <Button key="1" type="primary">
+                            Primary
+                        </Button>,
+                    </div>
                 ]}
                 onBack={() => window.history.back()}
                 // avatar={{ src: "https://avatars1.githubusercontent.com/u/8186664?s=460&v=4" }}
@@ -82,20 +84,26 @@ function Content(): JSX.Element {
                 easier for designers to have a clear psychological expectation of color when adjusting colors,
                 as well as facilitate communication in teams.
             </Paragraph>
-            <div>
-                <IconLink
+            <Row className={styles.linkList}>
+               <Col xs={{ span: 24 }} sm={{ span: 8 }}>
+                   <IconLink
                     src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-                    text="Quick Start"
-                />
-                <IconLink
-                    src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-                    text=" Product Info"
-                />
-                <IconLink
-                    src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-                    text="Product Doc"
-                />
-            </div>
+                    text="Telegram"
+               />
+               </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 8 }}>
+                    <IconLink
+                        src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
+                        text="HH.ru"
+                    />
+                </Col>
+                <Col xs={{ span: 24 }} sm={{ span: 8 }}>
+                    <IconLink
+                        src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
+                        text="Export resume"
+                    />
+                </Col>
+            </Row>
         </>
     );
 }
