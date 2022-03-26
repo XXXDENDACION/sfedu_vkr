@@ -1,8 +1,8 @@
+import DashboardCard from "../dashboard-card";
 import styles from "./style.module.css";
 import { Row, Col } from "antd";
 import ProjectCard from "./project-card";
 import { useRouter } from "next/router";
-import DashboardCard from "../dashboard-card";
 
 const CurrentProjects: React.FunctionComponent = () => {
   const router = useRouter();
