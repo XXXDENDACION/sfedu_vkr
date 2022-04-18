@@ -75,7 +75,8 @@ const Employees = () => {
                     type: "checkbox",
                     ...rowSelection
                 }}
-                onRow={(record) => {
+                onRow={(record: IUser) => {
+                    console.log(record);
                     return {
                         onClick: () => router.push(`/employees/${record.key}`)
                     };
