@@ -1,6 +1,6 @@
-import { makeAutoObservable } from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import CompanyService from "../../api/company";
-import { ICompany } from "../../utils/interfaces/company";
+import {ICompany} from "../../utils/interfaces/company";
 
 class Company {
     constructor() {
@@ -11,10 +11,12 @@ class Company {
     companyService;
     company: ICompany;
 
-    getCountriesAsync = async (id: number) => {
+    getCountriesAsync = async (id: number): Promise<void> => {
         try {
-            const data = await this.companyService.getDetailsCompany(id);
-            this.company = data;
+            const company = await this.companyService.getDetailsCompany(id);
+            runInAction(() => {
+                this.company = company;
+            });
         } catch (e) {
             console.log(e);
         }
