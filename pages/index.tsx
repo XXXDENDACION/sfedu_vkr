@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { Col, Rate, Row, Typography } from "antd";
+import { Col, Skeleton, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
 import PieCard from "../components/pie-card";
-import { userStore } from "../mobx/store/userStore";
 import { companyStore } from "../mobx/store/companyStore";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 
 const Dashboard = (): JSX.Element => {
-  const { count, changeAuth } = userStore;
-  const { getCountriesAsync, company } = companyStore;
-  console.log("RERENDER");
-  console.log(toJS(company));
+  const { getCompanyAsync, company, isLoading } = companyStore;
+
+  useEffect(() => {
+    if (!company) {
+      getCompanyAsync(1);
+    }
+  }, [getCompanyAsync, company]);
+
   return (
     <>
-      <button onClick={() => getCountriesAsync(1)}>Click</button>
       <div className={styles.dashboard_header}>
         <div className={styles.user_container}>
           <Image
@@ -28,7 +29,7 @@ const Dashboard = (): JSX.Element => {
             height={72}
           />
           <Typography.Text className={styles.title_text}>
-            ITP Premium
+            {isLoading ?  <Skeleton.Input active /> : company?.name}
           </Typography.Text>
         </div>
         <div className={styles.stats_container}>
@@ -56,7 +57,7 @@ const Dashboard = (): JSX.Element => {
             <Activity />
           </Col>
           <Col lg={{ span: 12 }}>
-            <Commands />
+            <Commands isLoading={isLoading} departments={company?.departments} />
             <PieCard />
             {/*<AwardsCard />*/}
           </Col>

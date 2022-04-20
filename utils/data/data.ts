@@ -1,5 +1,4 @@
 import {IUser} from "../interfaces/users";
-import {ColumnsType} from "antd/lib/table/interface";
 
 export const UsersList: IUser[] = [
     {

@@ -1,4 +1,9 @@
 
+.spinner {
+  position: absolute;
+  top: 0;
+}
+
 .dashboard_header {
   padding: 12px 50px;
   background-color: white;

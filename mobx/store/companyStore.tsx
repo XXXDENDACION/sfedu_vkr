@@ -10,14 +10,18 @@ class Company {
 
     companyService;
     company: ICompany;
+    isLoading = false;
 
-    getCountriesAsync = async (id: number): Promise<void> => {
+    getCompanyAsync = async (id: number): Promise<void> => {
+        this.isLoading = true;
         try {
             const company = await this.companyService.getDetailsCompany(id);
             runInAction(() => {
                 this.company = company;
+                this.isLoading = false;
             });
         } catch (e) {
+            this.isLoading = false;
             console.log(e);
         }
     }

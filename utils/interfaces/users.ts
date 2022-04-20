@@ -1,9 +1,13 @@
 export interface IUser {
-    key: number;
+    id: number;
     firstName: string;
     lastName: string;
-    age: string;
+    age?: string;
     photo?: string;
     position?: string;
-    skills: string[];
+    skills?: string[];
+}
+
+export interface ITableUser extends IUser {
+    key: number;
 }

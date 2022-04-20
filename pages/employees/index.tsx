@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 import styles from "./style.module.css";
-import {Table, Tag, PageHeader, Button, Statistic, Select, Typography} from "antd";
+import {Table, Tag, PageHeader, Button, Statistic, Select, Typography, Skeleton, Empty} from "antd";
 import { UsersList} from "../../utils/data/data";
-import { IUser } from "../../utils/interfaces/users";
+import type { ITableUser, IUser } from "../../utils/interfaces";
 import { useRouter } from "next/router";
-import {ColumnsType} from "antd/lib/table/interface";
+import type { ColumnsType } from "antd/lib/table/interface";
+import { usersStore } from "../../mobx/store/userStore";
+import { observer } from "mobx-react-lite";
 
 const { Option } = Select;
 const { Column } = Table;
@@ -42,44 +44,51 @@ export const Columns: ColumnsType = [
     }
 ];
 
-const Employees = () => {
+const Employees = (): JSX.Element => {
+    const { getUsersAsync, users, isLoading, tableUsers } = usersStore;
     const router = useRouter();
 
+    useEffect(() => {
+        if (!users) {
+            getUsersAsync();
+        }
+    }, [users, getUsersAsync]);
+
     const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[], selectedRows: IUser[]) => {
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
-        },
         getCheckboxProps: (record: IUser) => ({
           name: record.firstName,
         }),
     };
 
+    const dataTable = isLoading ? [] : tableUsers;
     return (
         <div>
             <PageHeader
                 className={styles.pageHeader}
                 title="Сотрудники"
                 extra={[
-                    <>
+                    <React.Fragment key="employee-header">
                         <Button key="withoutProject">Без проекта</Button>
                         <Button key="edit" type="primary" danger disabled>Изменить</Button>
-                    </>
+                    </React.Fragment>
                 ]}
             >
                 <HeaderContent />
             </PageHeader>
             <Table
-                dataSource={UsersList}
+                dataSource={dataTable}
                 columns={Columns}
                 rowSelection={{
                     type: "checkbox",
                     ...rowSelection
                 }}
-                onRow={(record: IUser) => {
-                    console.log(record);
+                onRow={(record: ITableUser) => {
                     return {
                         onClick: () => router.push(`/employees/${record.key}`)
                     };
+                }}
+                locale={{
+                    emptyText: isLoading ? <Skeleton active /> : <Empty />
                 }}
             >
                 <Column title="Имя" dataIndex="firstName" key="firstName" />
@@ -143,4 +152,4 @@ function renderTags(items: string[]): JSX.Element {
     );
 }
 
-export default Employees;
+export default observer(Employees);
