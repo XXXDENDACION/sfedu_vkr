@@ -5,12 +5,20 @@ import { Col, Rate, Row, Typography } from "antd";
 import CurrentProjects from "../components/current-projects";
 import Commands from "../components/commands";
 import Activity from "../components/activity";
-import AwardsCard from "../components/awards-card";
 import PieCard from "../components/pie-card";
+import { userStore } from "../mobx/store/userStore";
+import { companyStore } from "../mobx/store/companyStore";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const Dashboard = (): JSX.Element => {
+  const { count, changeAuth } = userStore;
+  const { getCountriesAsync, company } = companyStore;
+  console.log("RERENDER");
+  console.log(toJS(company));
   return (
     <>
+      <button onClick={() => getCountriesAsync(1)}>Click</button>
       <div className={styles.dashboard_header}>
         <div className={styles.user_container}>
           <Image
@@ -58,4 +66,4 @@ const Dashboard = (): JSX.Element => {
   );
 };
 
-export default Dashboard;
+export default observer(Dashboard);
