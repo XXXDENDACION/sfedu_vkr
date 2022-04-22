@@ -3,11 +3,12 @@ import "antd/dist/antd.css";
 import styles from "./style.module.css";
 import {Table, Tag, PageHeader, Button, Statistic, Select, Typography, Skeleton, Empty} from "antd";
 import { UsersList} from "../../utils/data/data";
-import type { ITableUser, IUser } from "../../utils/interfaces";
+import type { ITableUser, IUser, IUserFilters } from "../../utils/interfaces";
 import { useRouter } from "next/router";
 import type { ColumnsType } from "antd/lib/table/interface";
 import { usersStore } from "../../mobx/store/userStore";
 import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const { Option } = Select;
 const { Column } = Table;
@@ -44,15 +45,30 @@ export const Columns: ColumnsType = [
     }
 ];
 
+type IHeaderContent = {
+    filters: IUserFilters;
+    onSelectFilter: (type: string, value: number) => void;
+}
+
 const Employees = (): JSX.Element => {
-    const { getUsersAsync, users, isLoading, tableUsers } = usersStore;
+    const { getUsersAsync, getFiltersAsync, filters, users, isLoading, tableUsers, selectedFilters, onSelectFilter } = usersStore;
     const router = useRouter();
+    console.log(toJS(selectedFilters));
+    useEffect(() => {
+        getUsersAsync(selectedFilters);
+    }, [selectedFilters, selectedFilters.departments, selectedFilters.roles, selectedFilters.skills, getUsersAsync]);
 
     useEffect(() => {
         if (!users) {
             getUsersAsync();
         }
     }, [users, getUsersAsync]);
+
+    useEffect(() => {
+        if (!filters) {
+            getFiltersAsync();
+        }
+    }, [filters, getFiltersAsync]);
 
     const rowSelection = {
         getCheckboxProps: (record: IUser) => ({
@@ -73,7 +89,10 @@ const Employees = (): JSX.Element => {
                     </React.Fragment>
                 ]}
             >
-                <HeaderContent />
+                <HeaderContent 
+                    filters={{ departments: filters?.departments, roles: filters?.roles, skills: filters?.skills }}
+                    onSelectFilter={onSelectFilter} 
+                />
             </PageHeader>
             <Table
                 dataSource={dataTable}
@@ -101,7 +120,7 @@ const Employees = (): JSX.Element => {
     );
 };
 
-function HeaderContent(): JSX.Element {
+function HeaderContent({ filters, onSelectFilter }: IHeaderContent): JSX.Element {
     return (
         <div className={styles.content}>
             <div>
@@ -112,24 +131,27 @@ function HeaderContent(): JSX.Element {
                         placeholder="Choose role"
                         optionFilterProp="children"
                         className={styles.select}
+                        onChange={(value) => onSelectFilter("roles", value)}
                     >
-                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"role" + idx} value={item}>{item}</Option>)}
+                        {filters?.roles?.map((item => <Option key={"role" + item.id} value={item.id}>{item.role}</Option>))}
                     </Select>
                     <Select
                         showSearch
                         placeholder="Choose department"
                         optionFilterProp="children"
                         className={styles.select}
+                        onChange={value => onSelectFilter("departments", value)}
                     >
-                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"department" + idx} value={item}>{item}</Option>)}
+                        {filters?.departments?.map(item => <Option key={"department" + item.id} value={item.id}>{item.name}</Option>)}
                     </Select>
                     <Select
                         showSearch
                         placeholder="Choose skills"
                         optionFilterProp="children"
                         className={styles.select}
+                        onChange={value => onSelectFilter("skills", value)}
                     >
-                        {Array.from(Array(10).keys()).map((item, idx) => <Option key={"skill" + idx} value={item}>{item}</Option>)}
+                        {filters?.skills?.map(item => <Option key={"skill" + item.id} value={item.id}>{item.skill}</Option>)}
                     </Select>
                 </div>
             </div>
@@ -140,12 +162,12 @@ function HeaderContent(): JSX.Element {
     );
 }
 
-function renderTags(items: string[]): JSX.Element {
+function renderTags(items: {skill: string, id: number }[] ): JSX.Element {
     return (
         <>
             {items?.map((item, idx) => (
                 <Tag color="blue" key={`${item} + ${idx}`}>
-                    {item}
+                    {item.skill}
                 </Tag>
             ))}
         </>
