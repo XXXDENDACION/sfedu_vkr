@@ -25,6 +25,12 @@ export interface ITableUser extends IUser {
     key: number;
 }
 
+export interface IUserSelectedFilters {
+    skills: number;
+    roles: number;
+    departments: number;
+}
+
 export interface IUserFilters {
     skills: ISkill[];
     roles: IRole[];

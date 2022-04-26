@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 import styles from "./style.module.css";
 import {Table, Tag, PageHeader, Button, Statistic, Select, Typography, Skeleton, Empty} from "antd";
-import { UsersList} from "../../utils/data/data";
+import { CloseOutlined } from "@ant-design/icons";
 import type { ITableUser, IUser, IUserFilters } from "../../utils/interfaces";
 import { useRouter } from "next/router";
 import type { ColumnsType } from "antd/lib/table/interface";
 import { usersStore } from "../../mobx/store/userStore";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
+import {IUserSelectedFilters} from "../../utils/interfaces";
 
 const { Option } = Select;
 const { Column } = Table;
@@ -47,13 +48,17 @@ export const Columns: ColumnsType = [
 
 type IHeaderContent = {
     filters: IUserFilters;
+    selectedFilters: IUserSelectedFilters;
     onSelectFilter: (type: string, value: number) => void;
+    isFiltered: boolean;
+    clearFilters: () => void;
+    totalUsers: number;
 }
 
 const Employees = (): JSX.Element => {
-    const { getUsersAsync, getFiltersAsync, filters, users, isLoading, tableUsers, selectedFilters, onSelectFilter } = usersStore;
+    const { getUsersAsync, getFiltersAsync, filters, users, isLoading, tableUsers, selectedFilters, onSelectFilter, clearFilters } = usersStore;
     const router = useRouter();
-    console.log(toJS(selectedFilters));
+
     useEffect(() => {
         getUsersAsync(selectedFilters);
     }, [selectedFilters, selectedFilters.departments, selectedFilters.roles, selectedFilters.skills, getUsersAsync]);
@@ -91,7 +96,11 @@ const Employees = (): JSX.Element => {
             >
                 <HeaderContent 
                     filters={{ departments: filters?.departments, roles: filters?.roles, skills: filters?.skills }}
-                    onSelectFilter={onSelectFilter} 
+                    onSelectFilter={onSelectFilter}
+                    isFiltered={!!selectedFilters.departments || !!selectedFilters.skills || !!selectedFilters.roles}
+                    clearFilters={clearFilters}
+                    selectedFilters={selectedFilters}
+                    totalUsers={users?.length}
                 />
             </PageHeader>
             <Table
@@ -120,7 +129,7 @@ const Employees = (): JSX.Element => {
     );
 };
 
-function HeaderContent({ filters, onSelectFilter }: IHeaderContent): JSX.Element {
+function HeaderContent({ filters, selectedFilters, onSelectFilter, isFiltered = false, clearFilters, totalUsers }: IHeaderContent): JSX.Element {
     return (
         <div className={styles.content}>
             <div>
@@ -131,6 +140,7 @@ function HeaderContent({ filters, onSelectFilter }: IHeaderContent): JSX.Element
                         placeholder="Choose role"
                         optionFilterProp="children"
                         className={styles.select}
+                        value={selectedFilters.roles}
                         onChange={(value) => onSelectFilter("roles", value)}
                     >
                         {filters?.roles?.map((item => <Option key={"role" + item.id} value={item.id}>{item.role}</Option>))}
@@ -140,6 +150,7 @@ function HeaderContent({ filters, onSelectFilter }: IHeaderContent): JSX.Element
                         placeholder="Choose department"
                         optionFilterProp="children"
                         className={styles.select}
+                        value={selectedFilters.departments}
                         onChange={value => onSelectFilter("departments", value)}
                     >
                         {filters?.departments?.map(item => <Option key={"department" + item.id} value={item.id}>{item.name}</Option>)}
@@ -149,14 +160,16 @@ function HeaderContent({ filters, onSelectFilter }: IHeaderContent): JSX.Element
                         placeholder="Choose skills"
                         optionFilterProp="children"
                         className={styles.select}
+                        value={selectedFilters.skills}
                         onChange={value => onSelectFilter("skills", value)}
                     >
                         {filters?.skills?.map(item => <Option key={"skill" + item.id} value={item.id}>{item.skill}</Option>)}
                     </Select>
+                    {isFiltered && <Button onClick={clearFilters} type="text" icon={<CloseOutlined />} />}
                 </div>
             </div>
             <div>
-                <Statistic title="Количество" value={10} />
+                <Statistic title="Количество" value={totalUsers} />
             </div>
         </div>
     );

@@ -1,8 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import UserService from "../../api/users";
-import { IUser, ITableUser, IUserFilters } from "../../utils/interfaces";
+import {IUser, ITableUser, IUserFilters, IUserSelectedFilters} from "../../utils/interfaces";
 
-const initialSelectedFilters: IUserFilters = {
+const initialSelectedFilters: IUserSelectedFilters = {
     departments: null,
     roles: null,
     skills: null
@@ -22,7 +22,7 @@ class Users {
 
     filters: IUserFilters;
 
-    getUsersAsync = async (filters?: IUserFilters): Promise<void> => {
+    getUsersAsync = async (filters?: IUserSelectedFilters): Promise<void> => {
         this.isLoading = true;
         try {
             const users = await this.userService.getUsers(filters);
@@ -51,6 +51,10 @@ class Users {
 
     onSelectFilter = (type: string, value: number): void => {
         this.selectedFilters[type] = value;
+    }
+
+    clearFilters = (): void => {
+        this.selectedFilters = initialSelectedFilters;
     }
 
     get tableUsers(): ITableUser[] {
