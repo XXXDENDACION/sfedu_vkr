@@ -10,6 +10,11 @@ interface ISkill {
     skill: string;
 }
 
+interface IDepartmentUser {
+    id: number;
+    name: string;
+}
+
 export interface IUser {
     id: number;
     firstName: string;
@@ -19,6 +24,7 @@ export interface IUser {
     position?: string;
     skills?: ISkill[];
     role: IRole;
+    department: IDepartmentUser;
 }
 
 export interface ITableUser extends IUser {

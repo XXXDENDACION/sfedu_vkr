@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import type { ColumnsType } from "antd/lib/table/interface";
 import { usersStore } from "../../mobx/store/userStore";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
 import {IUserSelectedFilters} from "../../utils/interfaces";
 
 const { Option } = Select;
@@ -56,24 +55,8 @@ type IHeaderContent = {
 }
 
 const Employees = (): JSX.Element => {
-    const { getUsersAsync, getFiltersAsync, filters, users, isLoading, tableUsers, selectedFilters, onSelectFilter, clearFilters } = usersStore;
+    const { filters, users, isLoading, tableUsers, selectedFilters, onSelectFilter, clearFilters, handleSelectUserId } = usersStore;
     const router = useRouter();
-
-    useEffect(() => {
-        getUsersAsync(selectedFilters);
-    }, [selectedFilters, selectedFilters.departments, selectedFilters.roles, selectedFilters.skills, getUsersAsync]);
-
-    useEffect(() => {
-        if (!users) {
-            getUsersAsync();
-        }
-    }, [users, getUsersAsync]);
-
-    useEffect(() => {
-        if (!filters) {
-            getFiltersAsync();
-        }
-    }, [filters, getFiltersAsync]);
 
     const rowSelection = {
         getCheckboxProps: (record: IUser) => ({
@@ -112,7 +95,10 @@ const Employees = (): JSX.Element => {
                 }}
                 onRow={(record: ITableUser) => {
                     return {
-                        onClick: () => router.push(`/employees/${record.key}`)
+                        onClick: () => {
+                            router.push(`/employees/${record.key}`);
+                            handleSelectUserId(record.key);
+                        }
                     };
                 }}
                 locale={{

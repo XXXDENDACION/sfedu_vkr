@@ -1,8 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./style.module.css";
-import {Table, Tag, PageHeader, Button, Row, Col, Typography} from "antd";
+import {Tag, PageHeader, Button, Row, Col, Typography} from "antd";
 import EmployeeDetails from "../../components/employees/employee-details";
+import { usersStore } from "../../mobx/store/userStore";
+import { observer } from "mobx-react-lite";
 
 const { Paragraph } = Typography;
 
@@ -11,19 +13,23 @@ interface IContent {
     extraContent: React.ReactNode;
 }
 
-interface IEmployee {
-    title: string;
-    subTitle: string;
-    avatar?: string;
-}
 
 const Employee: FunctionComponent = () => {
     const router = useRouter();
-    console.log(router);
+    const { handleSelectUserId, fullName } = usersStore;
+
+    useEffect(() => {
+        const id = router.query?.id;
+        if (id) {
+            console.log(id);
+            handleSelectUserId(parseInt(id as string));
+        }
+    }, [handleSelectUserId, router.query]);
+
     return (
         <div>
             <PageHeader
-                title="Denis Smirnov"
+                title={fullName}
                 className={styles.pageHeader}
                 subTitle="This is a subtitle"
                 tags={<Tag color="blue">In Project</Tag>}
@@ -108,4 +114,4 @@ function Content(): JSX.Element {
     );
 }
 
-export default Employee;
+export default observer(Employee);

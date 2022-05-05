@@ -3,26 +3,34 @@ import styles from "./style.module.css";
 import { Descriptions, Card, Tag, Typography, Comment, Avatar, Row, Col } from "antd";
 import { DescriptionsItemProps } from "antd/lib/descriptions/Item";
 import moment from "moment";
+import { usersStore } from "../../../mobx/store/userStore";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const { Meta } = Card;
 const { Title, Paragraph }= Typography;
 const Item = (props: DescriptionsItemProps): JSX.Element => <Descriptions.Item {...props}>{props.children}</Descriptions.Item>;
 
+const labelStyles = { fontSize: "16px", fontWeight: "bold" };
+
 const EmployeeDetails: FunctionComponent = () => {
+    const { selectedUser, fullName } = usersStore;
+    console.log(toJS(selectedUser));
+
     return (
         <div className={styles.userDetailsWrapper}>
             <Descriptions title="Информация о пользователе" layout="vertical">
-                <Item labelStyle={{ fontSize: "16px", fontWeight: "bold" }} label="Полное имя">Zhou Maomao</Item>
-                <Item labelStyle={{ fontSize: "16px", fontWeight: "bold" }} label="Телефон">1810000000</Item>
-                <Item labelStyle={{ fontSize: "16px", fontWeight: "bold" }} label="Проживание">Hangzhou, Zhejiang</Item>
-                <Item labelStyle={{ fontSize: "16px", fontWeight: "bold" }} label="Адрес" span={2}>
-                No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+                <Item labelStyle={labelStyles} label="Полное имя">{fullName}</Item>
+                <Item labelStyle={labelStyles} label="Телефон">1810000000</Item>
+                <Item labelStyle={labelStyles} label="Проживание">Hangzhou, Zhejiang</Item>
+                <Item labelStyle={labelStyles} label="Возраст" span={2}>
+                {selectedUser?.age}
                 </Item>
-                <Item labelStyle={{ fontSize: "16px", fontWeight: "bold" }} label="Отдел">Front-End</Item>
+                <Item labelStyle={labelStyles} label="Отдел">{selectedUser?.department?.name}</Item>
             </Descriptions>
             <div className={styles.skillWrapper}>
                 <Title className={styles.projectTitle} level={5}>Скиллы</Title>
-                {Array.from(Array(10).keys()).map(item => <Tag color="green" key={`${item}-tag`}>JS</Tag>)}
+                {selectedUser?.skills?.map(item => <Tag color="green" key={`${item.id}-tag`}>{item.skill}</Tag>)}
             </div>
             <div className={styles.userProjectsWrapper}>
                 <div className={styles.projectTitle}>
@@ -72,4 +80,4 @@ const EmployeeDetails: FunctionComponent = () => {
     );
 };
 
-export default EmployeeDetails;
+export default observer(EmployeeDetails);

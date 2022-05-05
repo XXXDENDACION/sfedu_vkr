@@ -5,6 +5,7 @@ import LayoutComponent from "../components/layout";
 import "../styles/global.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { spy } from "mobx";
+import Auth from "./auth";
 React.useLayoutEffect = React.useEffect;
 
 const isServer = typeof window === "undefined";
@@ -21,7 +22,9 @@ const App = (props: AppProps): JSX.Element => {
 
   return (
     <LayoutComponent>
-      <Component key={router.pathname} {...pageProps} />
+      <Auth>
+        <Component key={router.pathname} {...pageProps} />
+      </Auth>
     </LayoutComponent>
   );
 };

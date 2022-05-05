@@ -8,26 +8,19 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import EditEvent from "./edit-event";
 import CreateEvent from "./create-event";
+import { observer } from "mobx-react-lite";
+import { eventStore } from "../../mobx/store/eventStore";
 
 const localizer = momentLocalizer(moment);
 
 const dateFormat = "YYYY/MM/DD HH:mm";
 
 const Calendar: FunctionComponent = () => {
+  const { eventsUser, createEvent } = eventStore;
   const DndCalendar = withDragAndDrop(BigCalendar as ComponentType<CalendarProps>);
   const [form] = Form.useForm();
-  const [events, setEvents] = useState<Event[]>([
-      {
-        title: "MS training",
-        allDay: true,
-        start: new Date(),
-        end: new Date(),
-        resource: {
-          id: 2,
-          description: "",
-        }
-      },
-    ]);
+  const [events, setEvents] = useState<Event[]>(eventsUser);
+  
   const [selectedEvent, setSelectedEvent] = useState<Event>();
   const [isNewEvent, setIsNewEvent] = useState<boolean>(false);
 
@@ -119,4 +112,4 @@ const Calendar: FunctionComponent = () => {
 };
 
 
-export default Calendar;
+export default observer(Calendar);

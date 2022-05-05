@@ -14,6 +14,11 @@ class UserService {
         const filters = await axios.get(USERS_API_URL + "/filters/1");
         return filters.data;
     };
+
+    getUserDetails = async (id: number): Promise<IUser> => {
+        const user = await axios.get(USERS_API_URL + id);
+        return user.data;
+    }
 }
 
 export default UserService;

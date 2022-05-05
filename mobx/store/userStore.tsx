@@ -19,6 +19,7 @@ class Users {
 
     isLoading = false;
     users: IUser[];
+    selectedUserId: number;
 
     filters: IUserFilters;
 
@@ -35,6 +36,19 @@ class Users {
             console.log(e);
         }
     }
+
+    // getUserAsync = async (id): Promise<void> => {
+    //     this.isLoading = true;
+    //     try {
+    //         const user = await this.userService.getUserDetails(id);
+    //         runInAction(() => {
+    //             this.isLoading = false;
+    //         });
+    //     } catch (e) {
+    //         this.isLoading = false;
+    //         console.log(e);
+    //     }
+    // }
 
     getFiltersAsync = async (): Promise<void> => {
         this.isLoading = true;
@@ -57,9 +71,26 @@ class Users {
         this.selectedFilters = initialSelectedFilters;
     }
 
+    handleSelectUserId = (id: number): void => {
+        this.selectedUserId = id;
+    }
+
     get tableUsers(): ITableUser[] {
         if (this.users) {
             return this.users.map(user => ({...user, key: user.id, position: user?.role?.role}));
+        }
+    }
+
+    get selectedUser(): IUser {
+        if (this.selectedUserId && this.users?.length > 0) {
+            return this.users.find(user => user.id === this.selectedUserId);
+        }
+    }
+
+    get fullName(): string {
+        if (this.selectedUserId && this.users?.length > 0) {
+            const user = this.users.find(user => user.id == this.selectedUserId);
+            return user.firstName + " " + user.lastName;
         }
     }
 
