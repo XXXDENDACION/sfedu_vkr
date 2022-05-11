@@ -29,9 +29,9 @@ class Event {
     createEvent = async (event: IEventCreate): Promise<void> => {
         this.isLoading = true;
         try {
-            const newEvent = await this.eventService.createEvent(event);
+            await this.eventService.createEvent(event);
+            await this.getEventsByUser(1);
             runInAction(() => {
-                this.eventsUser = [...this.eventsUser, newEvent];
                 this.isLoading = false;
             });
         } catch (e) {

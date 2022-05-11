@@ -4,6 +4,8 @@ interface IBaseEvent {
     title: string;
     description?: string;
     ownerId: number;
+    start: Date;
+    end: Date;
 }
 
 export interface IEventCreate extends IBaseEvent {
@@ -12,4 +14,8 @@ export interface IEventCreate extends IBaseEvent {
 
 export interface IEvent extends IBaseEvent {
     participants: IUser[];
+}
+
+export interface IEventDetails extends IBaseEvent {
+    users: IUser[];
 }

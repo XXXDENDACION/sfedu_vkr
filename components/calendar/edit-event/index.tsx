@@ -1,17 +1,21 @@
 import React from "react";
 import styles from "./style.module.css";
-import {Event} from "react-big-calendar";
-import {Button, Form, Input, Typography, DatePicker} from "antd";
+import {Button, Select, Form, Input, Typography, DatePicker} from "antd";
+import { toJS } from "mobx";
+import { IEvent } from "../../../utils/interfaces";
+import { observer } from "mobx-react-lite";
 
 interface IEditEvent {
-    selectedEvent: Event | null | undefined;
+    selectedEvent: IEvent | null | undefined;
     form: any;
     onFinish: (values) => void;
     dateFormat: string;
 }
 
-const EditEvent = (props: IEditEvent) => {
+const EditEvent = (props: IEditEvent): JSX.Element => {
     const {selectedEvent, form, onFinish, dateFormat} = props;
+    console.log((selectedEvent.participants.forEach(user => console.log(user.id))));
+
     return (
         <div>
             {selectedEvent && (
@@ -27,34 +31,46 @@ const EditEvent = (props: IEditEvent) => {
                         label="Название"
                         name="title"
                     >
-                        <Input/>
+                        <Input disabled />
                     </Form.Item>
                     <Form.Item
                         label="Описание"
                         name="description"
                     >
-                        <Input />
+                        <Input disabled />
                     </Form.Item>
                     <Form.Item
-                        label="Выберите время"
+                        label="Время"
                         name="rangePicker"
                     >
                         <DatePicker.RangePicker
+                            disabled
                             format={dateFormat}
                             showTime
                         />
                     </Form.Item>
                     <Form.Item
+                        label="Участники"
+                        name="select"
+                >
+                        {selectedEvent?.participants?.map(user => (
+                            <p key={user.id}>
+                                {user.firstName + " " + user.lastName}
+                            </p>
+                            )
+                        )}
+                    </Form.Item>
+                    {/* <Form.Item
                         wrapperCol={{ span: 8, offset: 8 }}
                     >
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
-                    </Form.Item>
+                    </Form.Item> */}
                 </Form>
             )}
         </div>
     );
 };
 
-export default EditEvent;
+export default observer(EditEvent);

@@ -10,6 +10,8 @@ import EditEvent from "./edit-event";
 import CreateEvent from "./create-event";
 import { observer } from "mobx-react-lite";
 import { eventStore } from "../../mobx/store/eventStore";
+import { toJS } from "mobx";
+import { IEvent } from "../../utils/interfaces";
 
 const localizer = momentLocalizer(moment);
 
@@ -17,19 +19,20 @@ const dateFormat = "YYYY/MM/DD HH:mm";
 
 const Calendar: FunctionComponent = () => {
   const { eventsUser, createEvent } = eventStore;
+  console.log(toJS(eventsUser));
   const DndCalendar = withDragAndDrop(BigCalendar as ComponentType<CalendarProps>);
   const [form] = Form.useForm();
   const [events, setEvents] = useState<Event[]>(eventsUser);
   
-  const [selectedEvent, setSelectedEvent] = useState<Event>();
+  const [selectedEvent, setSelectedEvent] = useState<IEvent>();
   const [isNewEvent, setIsNewEvent] = useState<boolean>(false);
 
-  const onSelectEvent = (event: Event): void => {
+  const onSelectEvent = (event: IEvent): void => {
     setSelectedEvent(event);
     setIsNewEvent(false);
     form.setFieldsValue({
       title: event.title,
-      description: event.resource.description,
+      description: event.description,
       rangePicker: [moment(event.start, dateFormat), moment(event.end, dateFormat)]
     });
   };
@@ -62,18 +65,19 @@ const Calendar: FunctionComponent = () => {
   };
 
   const onCreate = (values): void => {
+    console.log(values);
     form.setFieldsValue(values);
-    const newEvent: Event = {
+    const newEvent = {
       title: values.title,
-      allDay: true,
-      start: values.rangePicker[0]._d,
-      end: values.rangePicker[1]._d,
-      resource: {
-        id: events.length,
-        description: values.description
-      }
+      start: moment(values.rangePicker[0]).toDate(),
+      end: moment(values.rangePicker[1]).toDate(),
+      description: values.description,
+      ownerId: 1,
+      participants: values.select
     };
-    setEvents((prevState) => ([...prevState, newEvent]));
+    console.log(moment(values.rangePicker[0]).toDate());
+    createEvent(newEvent);
+    // setEvents((prevState) => ([...prevState, newEvent]));
     setIsNewEvent(false);
   };
 
@@ -82,7 +86,7 @@ const Calendar: FunctionComponent = () => {
       <Button onClick={onAdd} className={styles.addButton} type="primary" >Добавить событие</Button>
         <DndCalendar
             localizer={localizer}
-            events={events}
+            events={eventsUser}
             startAccessor="start"
             endAccessor="end"
             onSelectEvent={onSelectEvent}

@@ -4,6 +4,7 @@ import * as uiIcons from "../../components/icons/blackicon";
 import { Typography } from "antd";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { authStore } from "../../mobx/store/authStore";
 const { Option } = Select;
 const { TabPane } = Tabs;
 
@@ -36,20 +37,8 @@ export default function Signup() {
 
   const submitLogin = async (values: any) => {
     try {
-      console.log("Success:", values);
-      const user = await axios({
-        method: "post",
-        url: "http://157.230.26.253/api/login",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: values,
-      });
-      localStorage.setItem("token", user.data.access_token);
-      if (user.data.is_admin === "0") router.push("/");
-      else {
-        router.push("/super-admin");
-      }
+      await authStore.login(values.email, values.password);
+      router.push("/");
     } catch (e) {
       console.log(e);
     }
@@ -64,19 +53,7 @@ export default function Signup() {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <uiIcons.BlackLogo />
-          <Typography.Text className={styles.header_text}>
-            Лаборатория интернет- проектов
-          </Typography.Text>
         </div>
-        <Typography className={styles.text}>
-          “Лаборатория интернет-проектов IT Premium” – это веб-портал для
-          обучающихся, преподавателей (и управленцев ВУЗа) и представителей ИТ
-          компании (инженеров, разработчиков, QA, дизайнеров, PM), созданный с
-          целью организации единого информационного пространства для
-          осуществления совместной научно-технической деятельности, совместной
-          работы над проектами (проектная деятельность, курсовые, ВКР,
-          стажировки и практики, стартапы)
-        </Typography>
       </div>
       <div className={styles.form}>
         <Tabs defaultActiveKey="1">

@@ -3,12 +3,13 @@ import { Spin } from "antd";
 import { usersStore } from "../mobx/store/userStore";
 import { observer } from "mobx-react-lite";
 import { eventStore } from "../mobx/store/eventStore";
+import { authStore } from "../mobx/store/authStore";
 
 type IAuth = {
     children: React.ReactNode;
 }
 
-const Auth = ({ children }: IAuth): JSX.Element => {
+const MainDataLayer = ({ children }: IAuth): JSX.Element => {
     const { getUsersAsync, getFiltersAsync, filters, users, isLoading, selectedFilters } = usersStore;
     const { getEventsByUser } = eventStore;
 
@@ -35,9 +36,9 @@ const Auth = ({ children }: IAuth): JSX.Element => {
     return (
         <>
             {isLoading && <Spin style={{ position: "fixed", bottom: "50%", left: "50%" }} />}
-            {children}
+            {!isLoading && children}
         </>
     );
 };
 
-export default observer(Auth);
+export default observer(MainDataLayer);
